@@ -1,13 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --maize-crayola: #e8c547;
+  --jet: #30323d;
+  --independence: #4d5061;
+  --glaucous: #5c80bc;
+  --timberwolf: #cdd1c4;
+  --white: #ffffff;
+}
 body {
+  font-family: "Nunito", serif;
+  color: var(--independence);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  color: var(--independence);
+}
+.btn-blue {
+  border: solid 2px var(--glaucous);
+  border-radius: 5px;
+  padding: 5px 2px;
+  text-decoration: none;
+  background-color: var(--glaucous);
+  color: var(--white);
+  font-weight: 700;
+}
+.btn-white {
+  border: solid 2px;
+  border-radius: 5px;
+  padding: 5px 2px;
+  text-decoration: none;
+  background-color: #fff;
+  color: var(--independence);
+  font-weight: 700;
+}
+.main-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 50px;
+  /* border-bottom: 1px solid var(--timberwolf); */
+}
+.main-navbar__logo {
+  margin-right: auto;
+  /* Extra: to-be-removed */
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 900;
+  text-decoration: none;
+  /* Extra: to-be-removed */
+}
+.main-navbar__search {
+  margin: auto;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 700px;
+  display: none;
+}
+.main-navbar__search-search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--white);
+}
+.main-navbar__search-filter {
+  margin: 0 5px;
+  padding: 3px;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--glaucous);
+  color: var(--white);
+  border: solid 1px var(--independence);
+  border-radius: 5px;
+  position: relative;
+}
+.main-navbar__search-filter-text {
+  margin-left: 4px;
+}
+#hideAndShowSearch {
+  display: none;
+}
+/* ---pop-up-filter--- */
+.pop-up-filter {
+  position: absolute;
+  transform: translateY(63%);
+  width: 700px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: var(--timberwolf);
+  display: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.main-navbar__search-icon {
+  padding: 10px;
+  color: var(--independence);
+}
+.main-navbar__search-input {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  width: 100%;
+  background-color: transparent;
+}
+.main-navbar__search-input::placeholder {
+  color: var(--independence);
+}
+.main-navbar__search-button {
+  border: none;
+  border-left: 1px solid currentColor;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--glaucous);
+  color: var(--white);
+}
+.main-navbar__link {
+  margin: 10px;
+}
+.resize-icon-22 {
+  font-size: 22px;
+}
+
+@media screen and (max-width: 900px) {
+  .main-navbar {
+    justify-content: space-between;
+    padding: 15px;
+  }
+  .main-navbar__logo {
+    font-size: 20px;
+    margin-right: auto;
+  }
+  .main-navbar__search {
+    margin-top: 15px;
+    order: 2;
+    flex: 100%;
+  }
+  .main-navbar__link {
+    margin: 5px;
+  }
+  .pop-up-filter {
+    width: 335px;
+  }
+}
+
+/* --- homepage --- */
+.homepage-main-message {
+  margin-top: 50px;
+  padding: 50px 200px;
+}
+.homepage-main-message-text {
+  font-size: 60px;
+}
+.homepage-main-message-search {
+  display: flex;
+  width: 500px;
+}
+@media screen and (max-width: 900px) {
+  .homepage-main-message {
+    margin-top: 100px;
+    padding: 10px;
+  }
+  .homepage-main-message-text {
+    font-size: 34px;
+  }
+  .homepage-main-message-search {
+    display: flex;
+    width: 80%;
+  }
 }

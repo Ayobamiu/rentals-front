@@ -33,11 +33,12 @@ a {
   color: var(--independence);
   font-weight: 700;
 }
+
 .main-navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #fff;
+  background-color: transparent;
   box-sizing: border-box;
   z-index: 4;
   display: flex;
@@ -93,6 +94,13 @@ a {
 #hideAndShowSearch {
   display: none;
 }
+.rooms-near-me {
+  display: block;
+  margin-top: 20px;
+}
+.rooms-near-me-icon {
+  margin-right: 5px;
+}
 /* ---pop-up-filter--- */
 .pop-up-filter {
   position: absolute;
@@ -120,13 +128,14 @@ a {
 }
 .main-navbar__search-button {
   border: none;
-  border-left: 1px solid currentColor;
+  border-left: 1px solid var(--jet);
   align-self: stretch;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--glaucous);
   color: var(--white);
+  padding: 0 20px;
 }
 .main-navbar__link {
   margin: 10px;
@@ -158,9 +167,11 @@ a {
 }
 
 /* --- homepage --- */
+.homepage-first-section {
+  background-color: var(--maize-crayola);
+}
 .homepage-main-message {
-  margin-top: 50px;
-  padding: 50px 200px;
+  padding: 100px 200px;
 }
 .homepage-main-message-text {
   font-size: 60px;
@@ -171,8 +182,7 @@ a {
 }
 @media screen and (max-width: 900px) {
   .homepage-main-message {
-    margin-top: 100px;
-    padding: 10px;
+    padding: 100px 20px;
   }
   .homepage-main-message-text {
     font-size: 34px;

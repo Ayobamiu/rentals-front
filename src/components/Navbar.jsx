@@ -1,19 +1,9 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  hideOnScrollForNavbar,
-  showFilter,
-  showSearchBarForNavbar,
-} from "../services/showAndHides";
+import { showFilter, showSearchBarForNavbar } from "../services/showAndHides";
 
 class Navbar extends Component {
   state = {};
-  componentDidMount() {
-    window.onscroll = function () {
-      hideOnScrollForNavbar();
-    };
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -49,11 +39,7 @@ class Navbar extends Component {
               </div>
               <div className="pop-up-filter" id="pop-up-filter"></div>
             </NavLink>
-            <span
-              id="hideAndShowSearch"
-              className="resize-icon-22"
-              onClick={showSearchBarForNavbar}
-            >
+            <span className="resize-icon-22" onClick={showSearchBarForNavbar}>
               <i className="fa fa-search "></i>
             </span>
             <NavLink className="navbar__link" to="/">

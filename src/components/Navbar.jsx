@@ -28,16 +28,6 @@ class Navbar extends Component {
                 />
                 <button className="navbar__search-button">Search</button>
               </div>
-              <div className="navbar__search-filter">
-                <i className="fa fa-filter" onClick={showFilter}></i>
-                <span
-                  className="navbar__search-filter-text"
-                  onClick={showFilter}
-                >
-                  Filters
-                </span>
-              </div>
-              <div className="pop-up-filter" id="pop-up-filter"></div>
             </NavLink>
             <span className="resize-icon-22" onClick={showSearchBarForNavbar}>
               <i className="fa fa-search "></i>

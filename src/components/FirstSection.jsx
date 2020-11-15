@@ -5,6 +5,7 @@ import {
   showFilter,
   showSearchBar,
 } from "../services/showAndHides";
+import PopUpFilter from "./common/PopUpFilter";
 
 class FirstSection extends Component {
   state = {};
@@ -46,7 +47,8 @@ class FirstSection extends Component {
                   Filters
                 </span>
               </div>
-              <div className="pop-up-filter" id="pop-up-filter"></div>
+
+              <PopUpFilter />
             </NavLink>
             <span
               id="hideAndShowSearch"
@@ -77,7 +79,7 @@ class FirstSection extends Component {
             </h1>
             <p className="homepage-main-message-para">
               Getting a room and making money from your free space has been made
-              very easy. Add a listing to start making money off your free
+              very easy. <a href="#">Host a Home</a> to start making money off your free
               space. Or use the search bar to get yourself a decent affordable
               stay.
             </p>
@@ -89,7 +91,7 @@ class FirstSection extends Component {
                   name="search"
                   className="main-navbar__search-input"
                   placeholder="Where on Earth?"
-                /> 
+                />
                 <button className="main-navbar__search-button">Search</button>
               </div>
             </div>

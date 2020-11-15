@@ -5,14 +5,16 @@ export const hideOnScroll = () => {
   const mainNavbar = document.getElementById("main-navbar");
   const currentScrollPos = window.pageYOffset;
   if (currentScrollPos > "50") {
-    homepageMainMessageSearch.style.display = "none";
-    hideAndShowSearch.style.display = "block";
-    mainNavbar.style.backgroundColor = "white";
+    if (homepageMainMessageSearch)
+      homepageMainMessageSearch.style.display = "none";
+    if (hideAndShowSearch) hideAndShowSearch.style.display = "block";
+    if (mainNavbar) mainNavbar.style.backgroundColor = "white";
   } else {
-    homepageMainMessageSearch.style.display = "flex";
-    hideAndShowSearch.style.display = "none";
-    mainNavbarSearch.style.display = "none";
-    mainNavbar.style.backgroundColor = "transparent";
+    if (homepageMainMessageSearch)
+      homepageMainMessageSearch.style.display = "flex";
+    if (hideAndShowSearch) hideAndShowSearch.style.display = "none";
+    if (mainNavbarSearch) mainNavbarSearch.style.display = "none";
+    if (mainNavbar) mainNavbar.style.backgroundColor = "transparent";
   }
 };
 export const hideOnScrollForNavbar = () => {
@@ -35,10 +37,10 @@ export const hideOnScrollForNavbar = () => {
 
 export const showFilter = () => {
   const popUpFilter = document.querySelector(".pop-up-filter");
-  if (popUpFilter.style.display === "block") {
+  if (popUpFilter.style.display === "flex") {
     popUpFilter.style.display = "none";
   } else {
-    popUpFilter.style.display = "block";
+    popUpFilter.style.display = "flex";
   }
 };
 

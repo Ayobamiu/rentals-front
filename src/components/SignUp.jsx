@@ -1,13 +1,51 @@
 import React, { Component } from "react";
+import { signUpSchema } from "../services/schemas";
+import {
+  validateAge,
+  validateAllInput,
+  validateSingleInput,
+} from "../services/validate";
 import TextInput from "./common/TextInput";
 import Navbar from "./Navbar";
 
 class SignUp extends Component {
-  state = { email: "", password: "" };
+  state = {
+    data: {
+      email: "",
+      phone: "",
+      firstName: "",
+      lastName: "",
+      birthAge: "",
+      password: "",
+    },
+    errors: {},
+  };
   handleChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
+    const data = { ...this.state.data };
+    const errors = { ...this.state.errors };
+    data[event.target.name] = event.target.value;
+    if (event.target.name !== "birthAge") {
+      const error = validateSingleInput(event.target, signUpSchema);
+      if (error) {
+        errors[event.target.name] = error[0].message;
+      } else delete errors[event.target.name];
+      this.setState({ data, errors });
+    } else {
+      const error = validateAge(event.target.value);
+      if (error) {
+        errors[event.target.name] = error;
+      } else delete errors[event.target.name];
+      this.setState({ data, errors });
+    }
   };
+
+  handleSubmit = () => {
+    const errors = validateAllInput(this.state.data, signUpSchema);
+    this.setState({ errors });
+    if (!errors) console.log("Submited", this.state.data);
+  };
+
   render() {
     return (
       <>
@@ -21,13 +59,15 @@ class SignUp extends Component {
             onChange={this.handleChange}
             iconClass="fa fa-envelope"
             note="You'll get updates and reciepts on this email"
+            error={this.state.errors && this.state.errors.email}
           />
           <TextInput
-            type="phone"
-            name="tel"
+            type="tel"
+            name="phone"
             placeholder="Phone"
             onChange={this.handleChange}
             iconClass="fa fa-phone"
+            error={this.state.errors && this.state.errors.phone}
           />
           <TextInput
             type="text"
@@ -35,6 +75,7 @@ class SignUp extends Component {
             placeholder="First Name"
             onChange={this.handleChange}
             note="Make sure this matched the name on your ID"
+            error={this.state.errors && this.state.errors.firstName}
           />
           <TextInput
             type="text"
@@ -42,13 +83,16 @@ class SignUp extends Component {
             placeholder="Last Name"
             onChange={this.handleChange}
             note="Make sure this matched the name on your ID"
+            error={this.state.errors && this.state.errors.lastName}
           />
           <TextInput
-            type="number"
-            name="age"
+            type="date"
+            name="birthAge"
+            label="Date"
             placeholder="Birth Age"
             onChange={this.handleChange}
             note="You must have attained the age of majority (18)"
+            error={this.state.errors && this.state.errors.birthAge}
           />
           <TextInput
             name="password"
@@ -56,10 +100,15 @@ class SignUp extends Component {
             placeholder="Password"
             onChange={this.handleChange}
             iconClass="fa fa-lock"
+            error={this.state.errors && this.state.errors.password}
           />
-          <a href="#" type="submit" className="submit-btn">
+          <button
+            onClick={this.handleSubmit}
+            type="submit"
+            className="submit-btn"
+          >
             Agree & Sign-up
-          </a>
+          </button>
           <div className="sign-up-agreement">
             By clicking Agree & Sign-up, I agree to Lodgeek's Terms of Services.
           </div>

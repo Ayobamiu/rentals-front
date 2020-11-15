@@ -13,7 +13,7 @@ body {
   margin: 0;
 }
 a {
-  color: var(--independence);
+  color: var(--maize-crayola);
   padding-bottom: 2px;
 }
 .btn-blue {
@@ -68,6 +68,7 @@ a {
   font-size: 30px;
   font-weight: 900;
   text-decoration: none;
+  color: var(--glaucous);
   /* Extra: to-be-removed */
 }
 .main-navbar__search {
@@ -110,6 +111,7 @@ a {
 .rooms-near-me {
   display: block;
   margin-top: 20px;
+  color: var(--white);
 }
 .rooms-near-me-icon {
   margin-right: 5px;
@@ -122,7 +124,33 @@ a {
   height: 200px;
   border-radius: 10px;
   background-color: var(--timberwolf);
+  box-shadow: 0 1px 4px rgb(0, 0, 0, 0.5);
   display: none;
+  text-align: left;
+}
+.pop-up-filter-filter {
+  flex: 0 0 50%;
+  border-right: solid 1px var(--timberwolf);
+  padding: 10px;
+  box-sizing: border-box;
+}
+.pop-up-filter-title {
+  margin: 10px 0;
+  display: block;
+}
+.pop-up-filter-price {
+  display: flex;
+}
+.pop-up-filter-price-input {
+  width: 100%;
+  margin-right: 10px;
+}
+.pop-up-filter-sort {
+  flex: 0 0 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-navbar__search-icon {
@@ -175,14 +203,15 @@ a {
     margin: 5px;
   }
   .pop-up-filter {
-    width: 335px;
+    /* width: 335px; */
+    font-size: 13px;
   }
 }
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: transparent;
+  background-color: white;
   box-sizing: border-box;
   z-index: 4;
   display: flex;
@@ -254,7 +283,8 @@ a {
   width: 700px;
   height: 200px;
   border-radius: 10px;
-  background-color: var(--timberwolf);
+  background-color: var(--white);
+
   display: none;
 }
 
@@ -314,11 +344,20 @@ a {
 
 /* --- homepage --- */
 .homepage-first-section {
-  background-color: var(--maize-crayola);
+  /* background-color: var(--maize-crayola); */
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    ),
+    url("./image/front_background.jpg");
+  background-size: cover;
+  background-position: bottom;
   text-align: center;
 }
 .homepage-main-message {
   padding: 100px 200px;
+  color: var(--white);
 }
 .homepage-main-message-text {
   font-size: 60px;
@@ -335,11 +374,20 @@ a {
   margin: auto;
 }
 @media screen and (max-width: 900px) {
+  .homepage-first-section {
+    background-position: bottom;
+    text-align: unset;
+  }
   .homepage-main-message {
     padding: 100px 20px;
   }
   .homepage-main-message-text {
     font-size: 34px;
+  }
+  .homepage-main-message-para {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 100;
   }
   .homepage-main-message-search {
     display: flex;
@@ -586,6 +634,19 @@ a {
   display: block;
   margin: auto;
   font-size: 10px;
+}
+.reusable-text-input-label {
+  width: 80%;
+  display: block;
+  margin: auto;
+  font-size: 15px;
+}
+.reusable-text-input-error {
+  width: 80%;
+  display: block;
+  margin: auto;
+  font-size: 10px;
+  color: red;
 }
 .forget-password {
   width: 80%;

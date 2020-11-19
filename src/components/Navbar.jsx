@@ -1,9 +1,27 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { showFilter, showSearchBarForNavbar } from "../services/showAndHides";
+import {
+  gotoListingPage,
+  showSearchBarForNavbar,
+} from "../services/showAndHides";
+import { getLoggedInUser } from "../store/authSlice";
 
 class Navbar extends Component {
-  state = {};
+  state = {
+    search: "",
+  };
+  handleChange = (event) => {
+    event.preventDefault();
+    const search = event.target.value;
+    this.setState({
+      search,
+    });
+  };
+  handleListingSearch = () => {
+    window.location = "/listings";
+    console.log("Search");
+  };
   render() {
     return (
       <React.Fragment>
@@ -17,7 +35,7 @@ class Navbar extends Component {
             <NavLink className="navbar__logo" to="/">
               Logo
             </NavLink>
-            <NavLink className="navbar__search" id="navbar__search" to="/">
+            <div className="navbar__search" id="navbar__search">
               <div className="navbar__search-search">
                 <i className="fa fa-search navbar__search-icon"></i>
                 <input
@@ -25,10 +43,17 @@ class Navbar extends Component {
                   name="search"
                   className="navbar__search-input"
                   placeholder="Where on Earth?"
+                  onChange={this.handleChange}
+                  onFocus={gotoListingPage}
                 />
-                <button className="navbar__search-button">Search</button>
+                <button
+                  className="navbar__search-button"
+                  onClick={this.handleListingSearch}
+                >
+                  Search
+                </button>
               </div>
-            </NavLink>
+            </div>
             <span className="resize-icon-22" onClick={showSearchBarForNavbar}>
               <i className="fa fa-search "></i>
             </span>
@@ -37,11 +62,19 @@ class Navbar extends Component {
                 <i className="fa fa-heart-o "></i>
               </span>
             </NavLink>
+            {this.props.getLoggedInUser ? (
+              <NavLink className="main-navbar__link" to="/">
+                <span className="resize-icon-22">
+                  <i className="fa fa-user-circle "></i>
+                </span>
+              </NavLink>
+            ) : (
+              <NavLink className="main-navbar__link btn-white" to="/signup">
+                Sign Up
+              </NavLink>
+            )}
             <NavLink className="navbar__link btn-blue" to="/">
               Host a Home
-            </NavLink>
-            <NavLink className="navbar__link btn-white" to="/signup">
-              Sign Up
             </NavLink>
           </div>
         </div>
@@ -50,4 +83,14 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  loggedInUser: state.app.user,
+  getLoggedInUser: getLoggedInUser(),
+});
+
+// const matchDispatchToProps = (dispatch) => ({
+//   loadLoggedInUser: () => dispatch(loadLoggedInUser()),
+//   logUserIn: (email, password) => dispatch(logUserIn(email, password)),
+// });
+
+export default connect(mapStateToProps)(Navbar);

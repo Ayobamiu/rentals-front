@@ -21,7 +21,7 @@ export const validateAllInput = (data, schema) => {
 
 export const validateAge = (value) => {
   const year = value.split("-")[0];
-  if (year < "2002") {
+  if (Number(year) < 2002) {
     return "You must be above 18 to Register";
   }
 };

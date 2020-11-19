@@ -5,8 +5,8 @@ export const loginSchema = {
   password: Joi.string().min(3).label("Password"),
 };
 export const signUpSchema = {
-  email: Joi.string().email().label("Email"),
-  password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+  email: Joi.string().email().label("Email"), 
+  password: Joi.string().min(6).regex(/^[a-zA-Z0-9]{3,30}$/),
   phone: Joi.number().integer().label("Phone"),
   firstName: Joi.string().min(3).max(34).label("First Name"),
   lastName: Joi.string().min(3).max(34).label("Last Name"),

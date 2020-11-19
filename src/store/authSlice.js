@@ -1,84 +1,101 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSelector } from "reselect";
-import memoize from "lodash.memoize";
 import { apiCallBegan } from "./api";
+import jwt from "jsonwebtoken";
 
 const slice = createSlice({
-  name: "users",
-  initialState: { list: [] },
+  name: "user",
+  initialState: { profile: {} },
   reducers: {
-    usersRequested: (users, action) => {
-      users.loading = true;
+    userRequested: (user, action) => {
+      user.loading = true;
     },
-    usersReceived: (users, action) => {
-      users.list = action.payload;
-      users.loading = false;
-      users.lastFetch = Date.now();
+    userReceived: (user, action) => {
+      user.profile = action.payload;
+      user.loading = false;
     },
-    usersRequestFailed: (users, action) => {
-      users.loading = false;
+    userRequestFailed: (user, action) => {
+      user.loading = false;
     },
-    userAdded: (users, action) => {
-      users.list.push(action.payload.user);
-      // localStorage.setItem("authToken", action.payload.token);
-      // users.loggedInUser = action.payload.user;
+    authStart: (user, action) => {
+      user.loggedIn = false;
+      user.status = { message: "logging in", color: "blue" };
     },
-    userRemoved: (users, action) => {
-      users.list.pop((user) => user._id !== action.payload._id);
+    authSuccess: (user, action) => {
+      user.loggedIn = true;
+      user.profile = action.payload.user;
+      user.status = { message: "login successful", color: "green" };
+      localStorage.setItem("authToken", action.payload.token); 
     },
-    authStart: (users, action) => {
-      users.loggedIn = false;
+    authFailed: (user, action) => {
+      user.loggedIn = false;
+      // console.log(action.payload);
+      user.error = action.payload;
+      user.status = { message: "login failed", color: "red" };
     },
-    authSuccess: (users, action) => {
-      users.loggedIn = true;
+    authRemoved: (user, action) => {
+      user.loggedIn = false;
+      localStorage.removeItem("authToken");
+      user.profile = {};
     },
   },
 });
 
 export const {
-  userAdded,
-  usersRequested,
-  usersReceived,
-  usersRequestFailed,
-  userRemoved,
+  userRequested,
+  userReceived,
+  userRequestFailed,
+  authStart,
+  authSuccess,
+  authFailed,
+  authRemoved,
 } = slice.actions;
 
 export default slice.reducer;
 
-//Action creators
-export const loadUsers = () => (dispatch, getState) => {
+export const logUserIn = (email, password) => (dispatch) => {
   dispatch(
     apiCallBegan({
-      url: "/users",
-      onStart: usersRequested.type,
-      onSuccess: usersReceived.type,
-      onError: usersRequestFailed.type,
+      url: "users/login",
+      method: "post",
+      data: { email, password },
+      onStart: authStart.type,
+      onSuccess: authSuccess.type,
+      onError: authFailed.type,
+    })
+  );
+};
+export const logUserOut = () => (dispatch) => {
+  dispatch(
+    apiCallBegan({
+      url: "users/logout",
+      method: "post",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+      onSuccess: authRemoved.type,
     })
   );
 };
 
-export const getUsers = (state) => state.app.users.list;
-// export const loggedInUser = (state) => state.app.users.loggedInUser;
+export const loadLoggedInUser = () => (dispatch, getState) => {
+  dispatch(
+    apiCallBegan({
+      url: "/users/me",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("authToken"),
+      },
+      onStart: userRequested.type,
+      onSuccess: userReceived.type,
+      onError: userRequestFailed.type,
+    })
+  );
+};
 
-export const addUser = (user) =>
-  apiCallBegan({
-    url: "/users",
-    method: "post",
-    data: user,
-    onSuccess: userAdded.type,
-  });
-
-export const removeUser = () =>
-  apiCallBegan({
-    url: "/users/me",
-    method: "delete",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("authToken"),
-    },
-    onSuccess: userRemoved.type,
-  });
-
-export const getUserById = createSelector(
-  (state) => state.app.users,
-  (users) => memoize((id) => users.filter((user) => user._id === id))
-);
+export const getLoggedInUser = () => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    var decoded = jwt.verify(token, "thisismyjsonsignature");
+    return decoded.user;
+  }
+  return null;
+};

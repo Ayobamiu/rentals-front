@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import {
-  hideOnScroll,
-  showFilter,
-  showSearchBar,
-} from "../services/showAndHides";
-import PopUpFilter from "./common/PopUpFilter";
+import { connect } from "react-redux";
+import { hideOnScroll } from "../services/showAndHides";
+import { getLoggedInUser } from "../store/authSlice";
+import MainNavbar from "./common/MainNavbar";
+import SearchBar from "./common/SearchBar";
 
 class FirstSection extends Component {
   state = {};
@@ -14,62 +12,11 @@ class FirstSection extends Component {
       hideOnScroll();
     };
   }
-
   render() {
     return (
       <React.Fragment>
         <div className="homepage-first-section">
-          <div className="main-navbar" id="main-navbar">
-            <NavLink className="main-navbar__logo" to="/">
-              Logo
-            </NavLink>
-            <NavLink
-              className="main-navbar__search"
-              id="main-navbar__search"
-              to="/"
-            >
-              <div className="main-navbar__search-search">
-                <i className="fa fa-search main-navbar__search-icon"></i>
-                <input
-                  type="search"
-                  name="search"
-                  className="main-navbar__search-input"
-                  placeholder="Where on Earth?"
-                />
-                <button className="main-navbar__search-button">Search</button>
-              </div>
-              <div className="main-navbar__search-filter">
-                <i className="fa fa-filter" onClick={showFilter}></i>
-                <span
-                  className="main-navbar__search-filter-text"
-                  onClick={showFilter}
-                >
-                  Filters
-                </span>
-              </div>
-
-              <PopUpFilter />
-            </NavLink>
-            <span
-              id="hideAndShowSearch"
-              className="resize-icon-22"
-              onClick={showSearchBar}
-            >
-              <i className="fa fa-search "></i>
-            </span>
-            <NavLink className="main-navbar__link" to="/">
-              <span className="resize-icon-22">
-                <i className="fa fa-heart-o "></i>
-              </span>
-            </NavLink>
-            <NavLink className="main-navbar__link btn-blue" to="/">
-              Host a Home
-            </NavLink>
-            <NavLink className="main-navbar__link btn-white" to="/signup">
-              Sign Up
-            </NavLink>
-          </div>
-
+          <MainNavbar />
           <main
             className="homepage-main-message"
             id="homepage-main-message-search"
@@ -79,22 +26,11 @@ class FirstSection extends Component {
             </h1>
             <p className="homepage-main-message-para">
               Getting a room and making money from your free space has been made
-              very easy. <a href="#">Host a Home</a> to start making money off your free
-              space. Or use the search bar to get yourself a decent affordable
-              stay.
+              very easy. <a href="#">Host a Home</a> to start making money off
+              your free space. Or use the search bar to get yourself a decent
+              affordable stay.
             </p>
-            <div className="homepage-main-message-search" id="homepageSearch">
-              <div className="main-navbar__search-search">
-                <i className="fa fa-search main-navbar__search-icon"></i>
-                <input
-                  type="search"
-                  name="search"
-                  className="main-navbar__search-input"
-                  placeholder="Where on Earth?"
-                />
-                <button className="main-navbar__search-button">Search</button>
-              </div>
-            </div>
+            <SearchBar />
             <a className="rooms-near-me" href="#">
               <i className="fa fa-map-marker rooms-near-me-icon"></i>
               <span>Rooms near my Location</span>
@@ -106,4 +42,9 @@ class FirstSection extends Component {
   }
 }
 
-export default FirstSection;
+const mapStateToProps = (state) => ({
+  loggedInUser: state.app.user,
+  getLoggedInUser: getLoggedInUser(),
+});
+
+export default connect(mapStateToProps)(FirstSection);

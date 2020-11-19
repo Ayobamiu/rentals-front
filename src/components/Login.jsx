@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import TextInput from "./common/TextInput";
 import Navbar from "./Navbar";
-import Joi, { abort } from "joi-browser";
 import { validateAllInput, validateSingleInput } from "../services/validate";
 import { loginSchema } from "../services/schemas";
 import { Link } from "react-router-dom";
+import {
+  getLoggedInUser,
+  loadLoggedInUser,
+  logUserIn,
+} from "../store/authSlice";
+import { connect } from "react-redux";
 
 class Login extends Component {
   state = {
     data: { email: "", password: "" },
     errors: {},
   };
-
   handleChange = (event) => {
     event.preventDefault();
     const data = { ...this.state.data };
@@ -24,12 +28,14 @@ class Login extends Component {
     this.setState({ data, errors });
   };
   handleSubmit = () => {
-    const errors = validateAllInput(this.state.data, loginSchema);
-    this.setState({ errors });
-    if (!errors) console.log("Submited");
+    const { email, password } = this.state.data;
+    this.props.logUserIn(email, password);
   };
 
   render() {
+    if (this.props.getLoggedInUser) { 
+      window.location = "/";
+    }
     return (
       <>
         <Navbar />
@@ -58,8 +64,16 @@ class Login extends Component {
           >
             Sign in
           </button>
+          {this.props.loggedInUser.status && (
+            <small
+              style={{ color: this.props.loggedInUser.status.color }}
+              className="reusable-text-input-error"
+            >
+              {this.props.loggedInUser.status.message}
+            </small>
+          )}
           <div className="forget-password">
-            <a href="#">Forgot password?</a>
+            {/* <a href="#">Forgot password?</a> */}
             <span>
               Not a member? <Link to="/signup">Sign up</Link>
             </span>
@@ -70,4 +84,14 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  loggedInUser: state.app.user,
+  getLoggedInUser: getLoggedInUser(),
+});
+
+const matchDispatchToProps = (dispatch) => ({
+  loadLoggedInUser: () => dispatch(loadLoggedInUser()),
+  logUserIn: (email, password) => dispatch(logUserIn(email, password)),
+});
+
+export default connect(mapStateToProps, matchDispatchToProps)(Login);

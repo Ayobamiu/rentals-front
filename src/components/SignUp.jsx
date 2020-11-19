@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { signUpSchema } from "../services/schemas";
 import {
   validateAge,
   validateAllInput,
   validateSingleInput,
 } from "../services/validate";
+import { getLoggedInUser } from "../store/authSlice";
+import { addUser } from "../store/userSlice";
 import TextInput from "./common/TextInput";
 import Navbar from "./Navbar";
 
@@ -43,10 +46,13 @@ class SignUp extends Component {
   handleSubmit = () => {
     const errors = validateAllInput(this.state.data, signUpSchema);
     this.setState({ errors });
-    if (!errors) console.log("Submited", this.state.data);
+    if (!errors) this.props.addUser(this.state.data);
   };
 
   render() {
+    if (this.props.getLoggedInUser) {
+      window.location = "/";
+    }
     return (
       <>
         <Navbar />
@@ -109,12 +115,20 @@ class SignUp extends Component {
           >
             Agree & Sign-up
           </button>
+          {this.props.signUpError && (
+            <small
+              style={{ color: this.props.signUpError.color }}
+              className="reusable-text-input-error"
+            >
+              {this.props.signUpError.message}
+            </small>
+          )}
           <div className="sign-up-agreement">
             By clicking Agree & Sign-up, I agree to Lodgeek's Terms of Services.
           </div>
           <div className="forget-password">
             <span>
-              Already a member? <a href="#">Log in</a>
+              Already a member? <a href="/login">Log in</a>
             </span>
           </div>
         </div>
@@ -123,4 +137,13 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+  signUpError: state.app.users.status,
+  getLoggedInUser: getLoggedInUser(),
+});
+
+const matchDispatchToProps = (dispatch) => ({
+  addUser: (user) => dispatch(addUser(user)),
+});
+
+export default connect(mapStateToProps, matchDispatchToProps)(SignUp);

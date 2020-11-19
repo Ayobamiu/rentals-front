@@ -8,7 +8,12 @@ import SignUp from "./components/SignUp";
 
 class BaseRoutes extends Component {
   state = {};
+  componentDidMount() {}
+  sendData = () => {
+    this.props.setParamsFromApp("second");
+  };
   render() {
+    // this.sendData();
     return (
       <BrowserRouter>
         <Switch>

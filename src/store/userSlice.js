@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import memoize from "lodash.memoize";
 import { apiCallBegan } from "./api";
+import { logUserIn } from "./authSlice";
 
 const slice = createSlice({
-  name: "users",
+  name: "users", 
   initialState: { list: [] },
   reducers: {
     usersRequested: (users, action) => {
@@ -20,17 +21,18 @@ const slice = createSlice({
     },
     userAdded: (users, action) => {
       users.list.push(action.payload.user);
-      // localStorage.setItem("authToken", action.payload.token);
-      // users.loggedInUser = action.payload.user;
+      localStorage.setItem("authToken", action.payload.token);
+      logUserIn(action.payload.user.email, action.payload.user.password);
+      users.status = { message: "Sign Up Success", color: "green" };
+    },
+    userAddFailed: (users, action) => {
+      users.status = {
+        message: action.payload.response.data.error,
+        color: "red",
+      };
     },
     userRemoved: (users, action) => {
       users.list.pop((user) => user._id !== action.payload._id);
-    },
-    authStart: (users, action) => {
-      users.loggedIn = false;
-    },
-    authSuccess: (users, action) => {
-      users.loggedIn = true;
     },
   },
 });
@@ -41,6 +43,7 @@ export const {
   usersReceived,
   usersRequestFailed,
   userRemoved,
+  userAddFailed,
 } = slice.actions;
 
 export default slice.reducer;
@@ -57,15 +60,13 @@ export const loadUsers = () => (dispatch, getState) => {
   );
 };
 
-export const getUsers = (state) => state.app.users.list;
-// export const loggedInUser = (state) => state.app.users.loggedInUser;
-
 export const addUser = (user) =>
   apiCallBegan({
     url: "/users",
     method: "post",
     data: user,
     onSuccess: userAdded.type,
+    onError: userAddFailed.type,
   });
 
 export const removeUser = () =>

@@ -60,3 +60,8 @@ export const showSearchBarForNavbar = () => {
     mainNavbarSearch.style.display = "flex";
   }
 };
+export const gotoListingPage = () => {
+  if (window.location.pathname !== "/listings") {
+    window.location = "/listings";
+  }
+};

@@ -1,62 +1,55 @@
 import React, { Component } from "react";
-import Navbar from "./Navbar";
 import { connect } from "react-redux";
-import { addUser, getUsers, loadUsers, removeUser } from "../store/userSlice";
+import { hideOnScroll } from "../services/showAndHides";
+import MainNavbar from "./common/MainNavbar";
+import { addListing, loadListings } from "../store/listingSlice";
+import SearchBar from "./common/SearchBar";
+import PopUpFilter from "./common/PopUpFilter";
 
 class ListingsPage extends Component {
-  state = {};
+  state = { searchQuery: "" };
   componentDidMount() {
-    this.props.loadUsers();
-  }
-  handleAddUser = async () => {
-    const user = {
-      email: "email4@e.com",
-      phone: "08023361415",
-      firstName: "firstName",
-      lastName: "lastName",
-      birthDate: "2020-11-03",
-      password: "password",
+    window.onscroll = function () {
+      hideOnScroll();
     };
-    this.props.addUser(user);
-  };
-  handleRemoveUser = async () => {
-    this.props.removeUser();
+  }
+  handleSearch = (childData) => {
+    this.setState({ searchQuery: childData });
+    const params = new URLSearchParams([["search", this.state.searchQuery]]);
+    this.props.loadListings(params);
   };
   render() {
     return (
       <div className="listings-page">
-        <Navbar />
-        <button onClick={this.handleAddUser}>Add User</button>
-        <button onClick={this.handleRemoveUser}>Remove User</button>
-        {this.props.users.map((user) => (
-          <div key={user._id}>
-            <div>id:{user._id}</div>
-            <div>first Name: {user.firstName}</div>
-            <div>last Name: {user.lastName}</div>
-            <div>Email: {user.email}</div>
-            <div>Phone: {user.phone}</div>
-            <hr />
-          </div>
-        ))}
+        <MainNavbar />
 
-        <div>Logged-in User: </div>
-        {/* <div>firstName: {this.props.loggedInUser.firstName}</div>
-        <div>lastName: {this.props.loggedInUser.lastName}</div>
-        <div>email: {this.props.loggedInUser.email}</div> */}
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+
+        <SearchBar getSearchQuery={this.handleSearch} />
+
+        <PopUpFilter />
+        {this.state.params}
+        {this.props.listings.map((listing) => (
+          <div>{listing.title}</div>
+        ))}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  users: state.app.users.list,
-  loggedInUser: state.app.users.loggedInUser,
+  listings: state.app.listings.list,
+  loggedInUser: state.app.user.profile,
 });
 
 const matchDispatchToProps = (dispatch) => ({
-  loadUsers: () => dispatch(loadUsers()),
-  addUser: (user) => dispatch(addUser(user)),
-  removeUser: (user) => dispatch(removeUser(user)),
+  loadListings: (params) => dispatch(loadListings(params)),
+  addListing: (listing) => dispatch(addListing(listing)),
 });
 
 export default connect(mapStateToProps, matchDispatchToProps)(ListingsPage);

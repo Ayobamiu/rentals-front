@@ -36,7 +36,7 @@ class MainNavbar extends Component {
             Host a Home
           </NavLink>
         </div>
-        <div style={{ marginBottom: "100px" }}></div>
+        <div style={{ marginBottom: "80px" }}></div>
       </React.Fragment>
     );
   }

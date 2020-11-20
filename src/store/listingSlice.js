@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 
-let lastId = 0;
-
 const slice = createSlice({
   name: "listings",
   initialState: { list: [] },

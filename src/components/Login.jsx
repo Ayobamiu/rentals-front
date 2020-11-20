@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextInput from "./common/TextInput";
 import Navbar from "./Navbar";
-import { validateAllInput, validateSingleInput } from "../services/validate";
+import { validateSingleInput } from "../services/validate";
 import { loginSchema } from "../services/schemas";
 import { Link } from "react-router-dom";
 import {
@@ -33,7 +33,7 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.getLoggedInUser) { 
+    if (this.props.getLoggedInUser) {
       window.location = "/";
     }
     return (

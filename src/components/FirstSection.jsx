@@ -12,6 +12,7 @@ class FirstSection extends Component {
       hideOnScroll();
     };
   }
+  handleSearch = (searchQuery) => {};
   render() {
     return (
       <React.Fragment>
@@ -30,7 +31,7 @@ class FirstSection extends Component {
               your free space. Or use the search bar to get yourself a decent
               affordable stay.
             </p>
-            <SearchBar />
+            <SearchBar getSearchQuery={this.handleSearch} />
             <a className="rooms-near-me" href="#">
               <i className="fa fa-map-marker rooms-near-me-icon"></i>
               <span>Rooms near my Location</span>

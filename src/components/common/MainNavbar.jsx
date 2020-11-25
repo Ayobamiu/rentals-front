@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { getLoggedInUser } from "../../store/authSlice";
 class MainNavbar extends Component {
   state = {};
   render() {
@@ -8,7 +10,7 @@ class MainNavbar extends Component {
         <div className="main-navbar" id="main-navbar">
           <NavLink className="main-navbar__logo" to="/">
             Logo
-          </NavLink>
+          </NavLink> 
           <NavLink
             to="/listings"
             id="hideAndShowSearch"
@@ -36,10 +38,19 @@ class MainNavbar extends Component {
             Host a Home
           </NavLink>
         </div>
-        <div style={{ marginBottom: "80px" }}></div>
       </React.Fragment>
     );
   }
 }
 
-export default MainNavbar;
+const mapStateToProps = (state) => ({
+  loggedInUser: state.app.user,
+  getLoggedInUser: getLoggedInUser(),
+});
+
+// const matchDispatchToProps = (dispatch) => ({
+//   loadLoggedInUser: () => dispatch(loadLoggedInUser()),
+//   logUserIn: (email, password) => dispatch(logUserIn(email, password)),
+// });
+
+export default connect(mapStateToProps)(MainNavbar);

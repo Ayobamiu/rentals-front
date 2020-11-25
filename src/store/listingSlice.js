@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 import { apiCallBegan } from "./api";
+import memoize from "lodash.memoize";
 
 const slice = createSlice({
   name: "listings",

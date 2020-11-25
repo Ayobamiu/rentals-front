@@ -71,7 +71,7 @@ export const addUser = (user) =>
 
 export const removeUser = () =>
   apiCallBegan({
-    url: "/users/me",
+    url: "/users/me", 
     method: "delete",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authToken"),

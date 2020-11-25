@@ -2,62 +2,29 @@ import React, { Component } from "react";
 import one from "../image/one.jpg";
 import two from "../image/two.jpg";
 import three from "../image/three.jpg";
+import { loadListings } from "../store/listingSlice";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class ProductsOnHomepage extends Component {
-  state = {
-    listings: [
-      {
-        id: 1,
-        price: 400,
-        per: "night",
-        location: "Lagos, Lekki",
-        title: "Penthouse uptown Lekki",
-        image: one,
-      },
-      {
-        id: 2,
-        price: 250,
-        per: "night",
-        location: "Abuja",
-        title: "Couples standard two rooms",
-        image: two,
-      },
-      {
-        id: 3,
-        price: 100,
-        per: "night",
-        location: "Abuja, Garki",
-        title: "Nice suite for students",
-        image: three,
-      },
-      {
-        id: 4,
-        price: 80,
-        per: "night",
-        location: "Ibadan",
-        title: "Hotel bouqoute",
-        image: two,
-      },
-      {
-        id: 5,
-        price: 300,
-        per: "night",
-        location: "Abuja",
-        title: "Duplex in winscosin",
-        image: one,
-      },
-    ],
-  };
+  componentDidMount() {
+    this.props.loadListings();
+  }
   render() {
+    const listings = this.props.listings;
     return (
       <div className="homepage-products">
         <h1 className="light-heading">Stays around you</h1>
         <div className="homepage-products-list">
-          {this.state.listings.map((listing) => (
-            <div key={listing.id} className="homepage-products-item">
+          {listings.map((listing) => (
+            <Link
+              to={`/listings/${listing._id}`}
+              key={listing._id}
+              className="homepage-products-item"
+            >
               <div className="homepage-products-item-image">
                 <img
-                  src={listing.image}
+                  src={one}
                   alt=""
                   className="homepage-products-item-image-img"
                 />
@@ -73,10 +40,10 @@ class ProductsOnHomepage extends Component {
                   </span>
                 </div>
                 <div className="homepage-products-item-text-price">
-                  $ {listing.price}/ {listing.per}
+                  $ {listing.price}/ night
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -84,4 +51,14 @@ class ProductsOnHomepage extends Component {
   }
 }
 
-export default ProductsOnHomepage;
+const mapStateToProps = (state) => ({
+  listings: state.app.listings.list,
+});
+const matchDispatchToProps = (dispatch) => ({
+  loadListings: (params) => dispatch(loadListings(params)),
+});
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(ProductsOnHomepage);

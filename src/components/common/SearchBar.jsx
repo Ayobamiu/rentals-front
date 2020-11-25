@@ -20,7 +20,7 @@ class SearchBar extends Component {
           <i className="fa fa-search main-navbar__search-icon"></i>
           <input
             type="search"
-            name="search"
+            name="search" 
             className="main-navbar__search-input"
             placeholder="Where on Earth?"
             onFocus={gotoListingPage}

@@ -6,21 +6,29 @@ import four from "../image/four.jpg";
 import { checkListingAvailability } from "../services/booking";
 
 class ListingDetailsPage extends Component {
-  state = { bookResult: "", bookResultColor: "" };
+  state = { bookResult: "", bookResultColor: "", booking: {} };
   async componentDidMount() {
     this.props.loadListings();
   }
+  handleChange = (event) => {
+    event.preventDefault();
+    const name = event.target.name;
+    const value = event.target.value;
+    const booking = this.state.booking;
+    booking[name] = value;
+    this.setState({ booking });
+  };
   checkAvailability = async (event) => {
+    event.preventDefault();
     const bookButton = document.querySelector(".send-book-request-button");
     const loadingIndicate = document.querySelector(
       ".book-request-notification"
     );
-    event.preventDefault();
     loadingIndicate.style.display = "block";
     const booking = {
-      listing: "5fb2cd7f9dfd864b20908482",
-      checkIn: "2020-12-12",
-      checkOut: "2020-12-14",
+      listing: this.props.match.params.id,
+      checkIn: this.state.booking.checkIn,
+      checkOut: this.state.booking.checkOut,
     };
     const isAvailable = await checkListingAvailability(booking);
     if (isAvailable) {
@@ -54,9 +62,23 @@ class ListingDetailsPage extends Component {
 
             <form onSubmit={this.checkAvailability}>
               <label htmlFor="checkIn">check In</label>
-              <input type="date" name="checkIn" id="checkIn" />
+              <input
+                type="date"
+                name="checkIn"
+                id="checkIn"
+                required
+                title="Check In"
+                onChange={this.handleChange}
+              />
               <label htmlFor="checkOut">check Out</label>
-              <input type="date" name="checkOut" id="checkOut" />
+              <input
+                type="date"
+                name="checkOut"
+                id="checkOut"
+                required
+                title="Check In"
+                onChange={this.handleChange}
+              />
               <input type="submit" value="Check Availability" />
             </form>
 

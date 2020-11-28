@@ -612,7 +612,7 @@ a {
 .reusable-text-input-input {
   flex: 1;
   border: none;
-  background-color: transparent;
+  background-color: transparent; 
   align-self: stretch;
   padding: 10px;
 }

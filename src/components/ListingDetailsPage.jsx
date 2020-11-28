@@ -39,7 +39,7 @@ class ListingDetailsPage extends Component {
       });
     } else {
       this.setState({
-        bookResult: "Listing not available now",
+        bookResult: "Listing not available for this period",
         bookResultColor: "red",
       });
     }
@@ -70,6 +70,7 @@ class ListingDetailsPage extends Component {
                 title="Check In"
                 onChange={this.handleChange}
               />
+
               <label htmlFor="checkOut">check Out</label>
               <input
                 type="date"

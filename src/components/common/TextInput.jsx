@@ -20,7 +20,7 @@ class TextInput extends Component {
             ></i>
           )}
           <input
-            className="reusable-text-input-input"
+            className="reusable-text-input-input" 
             type={this.props.type}
             name={this.props.name}
             id={this.props.name}

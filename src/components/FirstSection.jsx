@@ -17,7 +17,7 @@ class FirstSection extends Component {
     return (
       <React.Fragment>
         <div className="homepage-first-section">
-          <MainNavbar />
+          <MainNavbar /> 
           <main
             className="homepage-main-message"
             id="homepage-main-message-search"

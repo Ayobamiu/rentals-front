@@ -1,0 +1,123 @@
+/* ------ listings-page ------ */
+.listings-page {
+  margin-top: 100px;
+}
+.listings-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.listing-list-item {
+  text-decoration: none;
+
+  height: 360px;
+  width: 280px;
+
+  border-radius: 16px;
+  background: #ffffff;
+  /* Large Drop Shadow */
+
+  box-shadow: 0px 32px 64px rgba(17, 17, 17, 0.08);
+  border-radius: 32px;
+}
+
+.listing-list-item-image {
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  height: 220px;
+  width: 280px;
+  border-radius: 16px;
+
+  /* Grayscale / Title-Active */
+
+  /* background: #14142b; */
+  position: relative;
+}
+.listing-list-item-image .info1 {
+  position: absolute;
+  left: 7.97%;
+  right: 89.53%;
+  top: 64.06%;
+  bottom: 34.14%;
+
+  /* Primary / Dark */
+  background: #ded3ff;
+
+  border-radius: 0px 24px 24px 24px;
+  height: 48px;
+  width: 48px;
+  /* opacity: 0.7; */
+}
+.listing-list-item-image .info2 {
+  position: absolute;
+  left: 31.61%;
+  right: 85.89%;
+  top: 64.06%;
+  bottom: 34.14%;
+  background: #2a00a2;
+
+  /* Primary / Light */
+
+  border-radius: 0px 24px 24px 24px;
+  height: 48px;
+  width: 48px;
+  /* opacity: 0.7; */
+}
+.listing-list-item-detail {
+  padding: 0 32px;
+}
+.listing-list-item-detail h2 {
+  /* A Large Link */
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  /* or 133% */
+
+  letter-spacing: 1px;
+
+  color: #000000;
+}
+.listing-list-item-detail p {
+  /* P Body */
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 36px;
+  /* or 189% */
+
+  letter-spacing: 1px;
+
+  color: #66738f;
+}
+
+@media screen and (max-width: 1020px) {
+  .listings-list {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 500px) {
+  .listing-list-item {
+    margin: 16px;
+
+    height: 300px;
+    width: 100%;
+    border-radius: 16px;
+  }
+  .listing-list-item-image {
+    height: 180px;
+    width: 100%;
+    border-radius: 16px;
+  }
+  .listing-list-item-detail {
+    padding: 0 16px;
+  }
+}

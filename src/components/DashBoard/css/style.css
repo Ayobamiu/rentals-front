@@ -1,0 +1,15 @@
+#dashBoard {
+  display: flex;
+  min-height: 100vh;
+  height: 100%;
+  max-width: 100%;
+}
+#dashBoard aside {
+  flex: 0 0 200px;
+  background-color: #ddd;
+  /* padding: 16px; */
+}
+#dashBoard main {
+  flex: 1;
+  background-color: #fff;
+}

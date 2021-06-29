@@ -1,0 +1,57 @@
+#landlord-dashboard .accordion-button:not(.collapsed) {
+  color: #4d5061;
+  background-color: #fff;
+  box-shadow: none;
+}
+#landlord-dashboard .accordion-button:not(.collapsed)::after {
+  background-image: url("../../../image/Vector5.png");
+}
+#landlord-dashboard .accordion-button::after {
+  background-image: url("../../../image/Plus.png");
+}
+#landlord-dashboard .accordion-button:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+#landlord-dashboard .hide-label {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+#landlord-dashboard label {
+  flex: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selection-button-minus {
+  display: none;
+}
+#landlord-dashboard input:checked ~ label {
+  background-color: #ef476f;
+  color: #f7f7fc;
+}
+#landlord-dashboard input:checked ~ label .selection-button-plus {
+  display: none;
+}
+#landlord-dashboard input:checked ~ label .selection-button-minus {
+  display: block;
+}
+#landlord-dashboard .accordion-button,
+#landlord-dashboard .accordion-body {
+  padding: 1rem 0rem;
+}
+.end-center-900 {
+  justify-content: flex-end;
+}
+.end-start-900 {
+  justify-content: flex-end;
+}
+@media screen and (max-width: 900px) {
+  .end-center-900 {
+    justify-content: center;
+  }
+  .end-start-900 {
+    justify-content: flex-start;
+  }
+}

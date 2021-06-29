@@ -5,7 +5,7 @@ import { apiCallBegan } from "./api";
 import { logUserIn } from "./authSlice";
 
 const slice = createSlice({
-  name: "users", 
+  name: "users",
   initialState: { list: [] },
   reducers: {
     usersRequested: (users, action) => {
@@ -71,7 +71,7 @@ export const addUser = (user) =>
 
 export const removeUser = () =>
   apiCallBegan({
-    url: "/users/me", 
+    url: "/users/me",
     method: "delete",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authToken"),

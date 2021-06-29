@@ -1,0 +1,115 @@
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+#sectionOne {
+  min-height: 400px;
+  background-image: url("../../../image/StripeBG.svg");
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#sectionTwo {
+  background-image: url("../../../image/StripeBG.svg");
+  background-position: left;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#sectionTwo .item {
+  height: 280px;
+  flex: 0 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 1rem;
+  background-image: url("../../../image/StripeBG.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#sectionTwo .item::before {
+  content: "";
+  width: 100px;
+  height: 10px;
+  background-color: #ef476f;
+  display: block;
+  border-radius: 10px;
+  transform: translateY(-40%);
+  animation: float 6s ease-in-out infinite;
+}
+#sectionThree .d-flex {
+  height: 300px;
+  overflow-y: scroll;
+}
+#sectionThree .d-flex::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+#sectionThree .item {
+  flex: 0;
+}
+#sectionThree .item::before {
+  content: "";
+  width: 50%;
+  height: 5px;
+  background-color: #ef476f;
+  display: block;
+  border-radius: 10px;
+  transform: translateY(40px);
+}
+#sectionThree .item p::after {
+  content: " Listings";
+}
+
+#sectionFour .item {
+  height: 195px;
+  border-radius: 0.5rem;
+  background: radial-gradient(rgba(29, 28, 28, 0.616), rgba(13, 13, 14, 0.158)),
+    url("../../../image/ralph-ravi-kayden-2d4lAQAlbDA-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  text-decoration: none;
+}
+#sectionFour .item.item-2 {
+  height: 400px;
+}
+@media screen and (max-width: 900px) {
+  #sectionTwo .item {
+    height: auto;
+    flex-grow: 1;
+  }
+  #sectionThree .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+
+    border-radius: 100px;
+    padding: 1rem !important;
+  }
+  #sectionThree .item::before {
+    display: none;
+  }
+  #sectionThree .item p,
+  #sectionThree .item h1 {
+    margin: 0 5px;
+  }
+  #sectionFour .item {
+    height: 195px;
+    margin-bottom: 0.5rem;
+  }
+  #sectionFour .item.item-2 {
+    height: 300px;
+  }
+}

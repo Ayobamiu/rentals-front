@@ -16,7 +16,7 @@ class SuitedFor extends Component {
   render() {
     return (
       <div className="homepage-suited-for">
-        <h1 className="light-heading">Suited for you</h1>
+        <h1 className="section-heading color-white">Suited for you</h1>
         <div className="homepage-suited-for-list">
           {this.state.services.map((service) => (
             <div key={service.id} className="homepage-suited-for-item">

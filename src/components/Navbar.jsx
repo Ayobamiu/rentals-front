@@ -20,7 +20,6 @@ class Navbar extends Component {
   };
   handleListingSearch = () => {
     window.location = "/listings";
-    console.log("Search");
   };
   render() {
     return (

@@ -11,3 +11,15 @@ export const checkListingAvailability = async (booking) => {
     return error;
   }
 };
+
+export const addBooking = async (booking) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3003/bookings",
+      booking
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

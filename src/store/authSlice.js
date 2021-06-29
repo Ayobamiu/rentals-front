@@ -24,11 +24,10 @@ const slice = createSlice({
       user.loggedIn = true;
       user.profile = action.payload.user;
       user.status = { message: "login successful", color: "green" };
-      localStorage.setItem("authToken", action.payload.token); 
+      localStorage.setItem("authToken", action.payload.token);
     },
     authFailed: (user, action) => {
       user.loggedIn = false;
-      // console.log(action.payload);
       user.error = action.payload;
       user.status = { message: "login failed", color: "red" };
     },
@@ -94,8 +93,9 @@ export const loadLoggedInUser = () => (dispatch, getState) => {
 export const getLoggedInUser = () => {
   const token = localStorage.getItem("authToken");
   if (token) {
-    var decoded = jwt.verify(token, "thisismyjsonsignature");
-    return decoded.user;
+    // var decoded = jwt.verify(token, process.env.JWT_SECRET);
+    var decoded = true;
+    return decoded;
   }
   return null;
 };

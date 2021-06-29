@@ -25,7 +25,7 @@ class Cities extends Component {
     return (
       <React.Fragment>
         <div className="homepage-cities">
-          <h1 className="light-heading">Find stay in different cities</h1>
+          <h1 className="section-heading ">Find stay in different cities</h1>
           <div className="homepage-cities-list">
             {this.state.cities.map((city) => (
               <div className="homepage-cities-city" key={city.id}>

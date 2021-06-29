@@ -1,0 +1,19 @@
+#landlord-dashboard .accordion-button:not(.collapsed) {
+  color: #4d5061;
+  background-color: #fff;
+  box-shadow: none;
+}
+#landlord-dashboard .accordion-button:not(.collapsed)::after {
+  background-image: url("../../../image/Vector5.png");
+}
+#landlord-dashboard .accordion-button::after {
+  background-image: url("../../../image/Plus.png");
+}
+#landlord-dashboard .accordion-button:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+#landlord-dashboard .accordion-button,
+#landlord-dashboard .accordion-body {
+  padding: 1rem 0rem;
+}

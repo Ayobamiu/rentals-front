@@ -1,0 +1,26 @@
+#searchpage .input-range {
+  /* background-color: #ef476f; */
+  /* width: 100px; */
+}
+#searchpage .input-range__track--active {
+  background-color: #ef476f;
+}
+#searchpage .input-range__slider {
+  border: 1px solid #ef476f;
+  background-color: #ef476f;
+}
+#searchpage form {
+  border-radius: 100px;
+  box-shadow: 0 0.1px 4px rgba(83, 82, 82, 0.164);
+}
+
+@media screen and (max-width: 900px) {
+  #searchpage form {
+    flex-wrap: wrap;
+    border-radius: 16px;
+  }
+  #searchpage .my-2-900 {
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+}

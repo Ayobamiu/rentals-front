@@ -1,0 +1,60 @@
+.listing-details-page {
+}
+.listing-details-page-image {
+  height: 60vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+}
+.listing-details-page h1 {
+  text-transform: capitalize;
+}
+.avatar {
+  height: 48px;
+  width: 48px;
+  left: 4px;
+  top: 4px;
+  border-radius: 80px;
+  /* Monaly primary */
+
+  background: #ef476f;
+  border-radius: 80px;
+  /* Desktop / Link X-Small */
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  /* identical to box height, or 114% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.25px;
+  justify-content: center;
+  text-transform: uppercase;
+
+  /* Grayscale / Off-white */
+
+  color: #fcfcfc;
+}
+.action-card {
+  height: auto;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  border-radius: 16px;
+  /* Grayscale / Off-white */
+
+  background: #fff;
+  box-shadow: 0px 0px 4px rgba(17, 17, 17, 0.08);
+}
+@media screen and (max-width: 900px) {
+  .action-card {
+    width: 100%;
+  }
+  .listing-details-page-image {
+    height: 45vh;
+  }
+}

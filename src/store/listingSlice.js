@@ -5,8 +5,12 @@ import memoize from "lodash.memoize";
 
 const slice = createSlice({
   name: "listings",
-  initialState: { list: [] },
+  initialState: { list: [], searchQuery: "", min: 1000, max: 10000 },
+
   reducers: {
+    changeInput: (listings, action) => {
+      listings[action.payload.name] = action.payload.value;
+    },
     listingsRequested: (listings, action) => {
       listings.loading = true;
     },
@@ -44,11 +48,15 @@ export const {
   listingAddStart,
   listingAddFailed,
   listingRemoved,
+  changeInput,
 } = slice.actions;
 
 export default slice.reducer;
 
 //Action creators
+export const changeListingInput = (name, value) => (dispatch) => {
+  dispatch({ type: changeInput, payload: { name, value } });
+};
 export const loadListings = (params) => (dispatch, getState) => {
   dispatch(
     apiCallBegan({

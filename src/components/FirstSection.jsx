@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hideOnScroll } from "../services/showAndHides";
 import { getLoggedInUser } from "../store/authSlice";
-import MainNavbar from "./common/MainNavbar";
+import MainNavbar from "./NavBar/MainNavbar";
 import SearchBar from "./common/SearchBar";
 
 class FirstSection extends Component {
@@ -17,7 +17,7 @@ class FirstSection extends Component {
     return (
       <React.Fragment>
         <div className="homepage-first-section">
-          <MainNavbar /> 
+          <MainNavbar />
           <main
             className="homepage-main-message"
             id="homepage-main-message-search"
@@ -45,7 +45,7 @@ class FirstSection extends Component {
 
 const mapStateToProps = (state) => ({
   loggedInUser: state.app.user,
-  getLoggedInUser: getLoggedInUser(),
+  // getLoggedInUser: getLoggedInUser(),
 });
 
 export default connect(mapStateToProps)(FirstSection);
